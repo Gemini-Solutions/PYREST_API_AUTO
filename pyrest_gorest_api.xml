@@ -1,0 +1,301 @@
+<data>
+    <suite>
+        <project>GEMECO-API-PY</project>
+        <report_name>PypRest Regression</report_name>
+        <mode>optimize</mode>
+        <mail>arpit.mishra@geminisolutions.com</mail>
+        <env>PROD</env>
+        <bridge_token>41679bf4-d761-48fb-9f69-04ce0580f88e1664443750633</bridge_token>
+        <username>sachin.chand</username>
+        <report_info>Test Suite to check all the features of pyprest</report_info>
+    </suite>
+    <testcases>
+            <testcase>
+            <name>Post_assertion_not_in</name>
+            <category>sample</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/$[#SUITE.user]</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#SUITE.pst]=posts;set $[#SUITE.user]=users;set $[#epochmilli]=$[#epoch(milli)];set $[#SUITE.var2] = VAR_1</pre_variables>
+            <key_check></key_check>
+            <post_variables>set $[#post_var_meth]=$[#epochmilli];set $[#SUITE.var3]="SUITE_VAR2";</post_variables>
+            <post_assertion>compare response[0].id not in [2,4,3088.0];compare response[0].id in [2.0,4.0,3088]; compare response[0].name not to  'Ekaksh Singh JD'; compare response[0].name not in  ['Ekaksh Singh JD',  '1'];compare response.id to 3284;</post_assertion>
+            <location>tests</location>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Post_assertion_to</name>
+            <category>sample</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/$[#SUITE.pst]</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#user]=users;set $[#epochmilli]=$[#epoch(milli)];set $[#SUITE.var4] = $[#SUITE.var3]</pre_variables>
+            <key_check></key_check>
+            <post_variables>set $[#post_var_meth]=$[#epochmilli];set $[#SUITE.var5]="SUITE_VAR5";</post_variables>
+            <post_assertion> compare response[0].name to  "3284"; compare response[0].name to "3284";</post_assertion>
+            <location>tests</location>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        
+        <testcase>
+            <name>Test_Pre_Variable_in_Body</name>
+            <category>Pre_variables</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>POST</method>
+            <body> {        
+                "name": " JOhn",
+                "email": "JOhn@gmail.biz",
+                "gender": "$[#gender]",
+                "status": "inactive"
+            }</body>
+            <headers>{"content-type":"application/json","accept":"application/json", "Authorization":"Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"}</headers>
+            <expected_status_code>201</expected_status_code>
+            <key_check></key_check>
+            <pre_variable>set $[#gender]=male</pre_variable>
+            <key_check></key_check>
+            <post_assertion></post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Test_Pre_Variable_in_Headers</name>
+            <category>Pre_variables</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>POST</method>
+            <body> {        
+                "name": " JOhn",
+                "email": "JOhn@gmail.biz",
+                "gender": "male",
+                "status": "inactive"
+            }</body>
+            <headers>{"content-type":"application/json","accept":"application/json", "$[#auth]":"Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"}</headers>
+            <expected_status_code>201</expected_status_code>
+            <key_check></key_check>
+            <pre_variable>set $[#auth]=Authorization</pre_variable>
+            <key_check></key_check>
+            <post_assertion></post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+          <testcase>
+            <name>Test_Post</name>
+            <category>Method</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>POST</method>
+            <body> {        
+                "name": " JOhn",
+                "email": "JOhn@gmail.biz",
+                "gender": "male",
+                "status": "inactive"
+            }</body>
+            <headers>{"content-type":"application/json","accept":"application/json", "Authorization":"Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"}</headers>
+            <expected_status_code>201</expected_status_code>
+            <key_check>keys are response[0].id;</key_check>
+            <pre_variable></pre_variable>
+            <key_check></key_check>
+            <post_assertion></post_assertion>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        
+        <testcase>
+            <name>Legacy- Execution-POST</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>POST</method>
+            <body>{
+                "name": "Arpit Mishra",
+                "email": "arpit_$[#SUITE.uniq_id_curr]@gmail.com",
+                "gender": "male",
+                "status": "active"
+            }</body>
+            <headers>{
+            "Accept": "application/json",
+            "Content-Type":"application/json",
+            "Authorization": "Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"    
+            }</headers>
+            <expected_status_code>200,201,422</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#SUITE.uniq_id_curr]=$[#uuid()];set $[#SUITE.uniq_id_lega]=$[#uuid()]</pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users</legacy_api>
+            <legacy_method>POST</legacy_method>
+            <legacy_headers>{
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+                "Authorization": "Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"    
+                }</legacy_headers>
+            <legacy_body>
+                {
+                    "name": "Arpit Mishra",
+                    "email": "arpit_$[#SUITE.uniq_id_lega]@gmail.com",
+                    "gender": "male",
+                    "status": "active"
+                }
+            </legacy_body>
+            <legacy_expected_status_code>200,201,422</legacy_expected_status_code>
+            <key_check>keys are legacy.id, legacy.name,legacy.gender, legacy.status, name, gender, status,id</key_check>
+            <post_variables>set $[#SUITE.legacy_id]=$[#legacy.id];set $[#SUITE.curr_id]=$[#response.id];</post_variables>
+            <post_assertion></post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Legacy- Execution-PUT</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users/$[#SUITE.curr_id]</api>
+            <method>PUT</method>
+            <body>{
+                "name": "Arpit $[#curr_name_uid]",
+                "status": "active"
+            }</body>
+            <headers>{
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+                "Authorization": "Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"    
+                }</headers>
+            <expected_status_code>200,300</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#curr_name_uid]=$[#uuid()];set $[#legacy_name_uid]=$[#uuid()];</pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users/$[#SUITE.legacy_id]</legacy_api>
+            <legacy_method>PUT</legacy_method>
+            <legacy_headers>{
+                "Accept": "application/json",
+                "Content-Type":"application/json",
+                "Authorization": "Bearer 7cf300a3954980370df0803705cb1fb157b4dea84eecf0f2d206f41d48c4a8b5"    
+                }</legacy_headers>
+            <legacy_body>{
+                "name": "Arpit $[#legacy_name_uid]",
+                "status": "active"
+            }</legacy_body>
+            <legacy_expected_status_code>200,300</legacy_expected_status_code>
+            <key_check></key_check>
+            <post_variables></post_variables>
+            <post_assertion></post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        
+                <testcase>
+            <name>Legacy- keycheck response list</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200,300,400</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#SUITE.varpost]=posts;set $[#epochmilli]=$[#epoch(milli)]; set $[#SUITE.user] = users; set $[#SUITE.var1] = VAR_1</pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users</legacy_api>
+            <legacy_method>GET</legacy_method>
+            <legacy_headers>{"accept":"application/json"}</legacy_headers>
+            <legacy_body>{}</legacy_body>
+            <legacy_expected_status_code>200,300</legacy_expected_status_code>
+            <key_check>keys are legacy[0].id, response[0].id</key_check>
+            <post_variables></post_variables>
+            <post_assertion></post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        
+        <testcase>
+            <name>Legacy- postassertion between keys</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200,300,400</expected_status_code>
+            <authentication></authentication>
+            <pre_variables></pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users</legacy_api>
+            <legacy_method>GET</legacy_method>
+            <legacy_headers>{"accept":"application/json"}</legacy_headers>
+            <legacy_body>{}</legacy_body>
+            <legacy_expected_status_code>200,300</legacy_expected_status_code>
+            <key_check></key_check>
+            <post_variables></post_variables>
+            <post_assertion>compare legacy[0].id to response[0].id;</post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Legacy- postassertion between variables</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200,300,400</expected_status_code>
+            <authentication></authentication>
+            <pre_variables></pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users</legacy_api>
+            <legacy_method>GET</legacy_method>
+            <legacy_headers>{"accept":"application/json"}</legacy_headers>
+            <legacy_body>{}</legacy_body>
+            <legacy_expected_status_code>200,300</legacy_expected_status_code>
+            <key_check></key_check>
+            <post_variables>set $[#curr_id]=$[#response[0].id]</post_variables>
+            <post_assertion>compare legacy[0].id to $[#curr_id];</post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Legacy- postassertion all operaters</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/users</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200,300,400</expected_status_code>
+            <authentication></authentication>
+            <pre_variables>set $[#SUITE.varpost]=posts;set $[#epochmilli]=$[#epoch(milli)]; set $[#SUITE.user] = users; set $[#SUITE.var1] = VAR_1</pre_variables>
+            <legacy_api>https://gorest.co.in/public/v2/users</legacy_api>
+            <legacy_method>GET</legacy_method>
+            <legacy_headers>{"accept":"application/json"}</legacy_headers>
+            <legacy_body>{}</legacy_body>
+            <legacy_expected_status_code>200,300</legacy_expected_status_code>
+            <key_check></key_check>
+            <post_variables></post_variables>
+            <post_assertion>Compare all to legacy;</post_assertion>
+            <debug_mode>false</debug_mode>
+            <report_misc></report_misc>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+        <testcase>
+            <name>Replacement_of_null</name>
+            <category>Legacy API Features</category>
+            <run_flag>Y</run_flag>
+            <api>https://gorest.co.in/public/v2/$[#users]</api>
+            <method>GET</method>
+            <body>{}</body>
+            <headers>{}</headers>
+            <expected_status_code>200,300,400</expected_status_code>
+            <key_check></key_check>
+            <post_variables></post_variables>
+            <TYPE>PYPREST</TYPE>
+        </testcase>
+    </testcases>
+</data>
