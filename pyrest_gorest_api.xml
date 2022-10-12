@@ -3,9 +3,8 @@
         <project>GEMECO-API-PY</project>
         <report_name>PypRest Regression</report_name>
         <mode>optimize</mode>
-        <mail>arpit.mishra@geminisolutions.com</mail>
         <env>PROD</env>
-        <bridge_token>41679bf4-d761-48fb-9f69-04ce0580f88e1664443750633</bridge_token>
+        <bridge_token>41679bf4-d761-48fb-9f69-0sdfe0580f88e1664443750633</bridge_token>
         <username>sachin.chand</username>
         <report_info>Test Suite to check all the features of pyprest</report_info>
     </suite>
